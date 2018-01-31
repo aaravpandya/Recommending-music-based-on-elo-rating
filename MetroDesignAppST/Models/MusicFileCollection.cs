@@ -1,23 +1,34 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TagLib;
+using MetroDesignAppST.Extensions;
 
 namespace MetroDesignAppST.Models
 {
     public class MusicFileCollection
     {
-        public List<MusicFile> mfiles;
+        public ObservableCollection<MusicFile> mfiles;
+        public ConcurrentBag<MusicFile> MusicFilesCB;
         public MusicFile mf = null;
         public static MusicFile selectedItem;
         public MusicFileCollection()
         {
-            mfiles = new List<MusicFile>();
+            MusicFilesCB = new ConcurrentBag<MusicFile>();
             //MusicFile mf = new MusicFile("hello", "hello", "hllow", "hellow");
             PopulateList();
+            mfiles = (MusicFilesCB as IEnumerable<MusicFile>).ToObservableCollection();
+            
+        }
+
+        internal void Shuffle()
+        {
+            mfiles.Shuffle();
         }
 
         public void PopulateList()
@@ -49,7 +60,7 @@ namespace MetroDesignAppST.Models
                    mf = new MusicFile(f.FullName, tags.Title, tags.Album, tags.FirstPerformer);
                 }
 
-                mfiles.Add(mf);
+                MusicFilesCB.Add(mf);
                 
 
             }
@@ -61,9 +72,11 @@ namespace MetroDesignAppST.Models
             set { mfiles[index] = value; }
         }
 
-        public void Sort()
-        {
-
-        }
+        //public void Sort()
+        //{
+        //    IEnumerable<MusicFile> _musicFileEnumerable = MusicFilesCB as IEnumerable<MusicFile>;
+        //    _musicFileEnumerable = _musicFileEnumerable.OrderBy(c => c.Title);
+        //    mfiles = _musicFileEnumerable.ToObservableCollection();
+        //}
     }
 }

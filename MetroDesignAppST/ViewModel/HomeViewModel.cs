@@ -10,15 +10,19 @@ namespace MetroDesignAppST.ViewModel
 {
     public class HomeViewModel
     {
-        public MusicFileCollection mc;
+        public static MusicFileCollection mc = new MusicFileCollection();
         public HomeViewModel()
         {
-            mc = new MusicFileCollection();
         }
 
         public void SendSelectedItem(MusicFile file)
         {
             MusicFileCollection.selectedItem = file;
+        }
+
+        internal static void Shuffle()
+        {
+            mc.Shuffle();
         }
     }
 }

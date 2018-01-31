@@ -169,12 +169,12 @@
                     <ColumnDefinition Name="Repeat" Width="auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Name="ShuffleBtn" Grid.Column="1" FontFamily="Segoe MDL2 Assets" Content="&#xE14B;" FontSize="24" BorderThickness="0" Background="#FF444444"/>
+                <Button Name="ShuffleBtn" Grid.Column="1" FontFamily="Segoe MDL2 Assets" Content="&#xE14B;" FontSize="24" BorderThickness="0" Background="#FF444444" Click="ShuffleBtn_Click"/>
                 <Button Name="PreviousBtn" Grid.Column="2" FontFamily="Segoe MDL2 Assets" Content="&#xE100;" FontSize="24" BorderThickness="0" Background="#FF444444"/>
                 <Button Name="PlayBtn" Grid.Column="3" FontFamily="Segoe MDL2 Assets" Content="&#xE102;" FontSize="24" BorderThickness="0" Background="#FF444444" Click="PlayBtn_Click"/>
                 <Button Name="NextBtn" Grid.Column="4" FontFamily="Segoe MDL2 Assets" Content="&#xE101;" FontSize="24" BorderThickness="0" Background="#FF444444"/>
                 <Button Name="RepeatBtn" Grid.Column="5" FontFamily="Segoe MDL2 Assets" Content="&#xE149;" FontSize="24" BorderThickness="0" Background="#FF444444"/>
-
+                <!--<Button Name="ShuffleBtn" Grid.Column="6" FontFamily="Segoe MDL2 Assets" Content="&#xE15D;" FontSize="24" BorderThickness="0" Background="#FF444444"/>-->
 
             </Grid>
         </Grid>

@@ -11,8 +11,7 @@ namespace MetroDesignAppST.ViewModel
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        public MusicFileCollection mc;
-        public MusicPlayer Player;
+        public static MusicPlayer Player = new MusicPlayer();
         private double seekbarPosition;
         public double SeekbarPosition
         {
@@ -38,8 +37,6 @@ namespace MetroDesignAppST.ViewModel
 
         public MainWindowViewModel()
         {
-            mc = new MusicFileCollection();
-            Player = new MusicPlayer();
             Player.PropertyChanged += PlayerPropertyChanged;
         }
 

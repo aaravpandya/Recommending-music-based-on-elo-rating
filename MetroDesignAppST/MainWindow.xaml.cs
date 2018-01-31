@@ -70,5 +70,9 @@ namespace MetroDesignAppST
             vm.Dispose();
         }
 
+        private void ShuffleBtn_Click(object sender, RoutedEventArgs e)
+        {
+            HomeViewModel.Shuffle();
+        }
     }
 }
