@@ -1,13 +1,13 @@
 ﻿<controls:MetroWindow x:Class="MetroDesignAppST.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MetroDesignAppST"
-        xmlns:views="clr-namespace:MetroDesignAppST.Views"
-        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+                      xmlns:views="clr-namespace:MetroDesignAppST.Views"
+                      mc:Ignorable="d"
+                      Title="MainWindow" Height="350" Width="525"
         Closing="MetroWindow_Closing">
     <Grid>
         <Grid.RowDefinitions>
@@ -59,7 +59,11 @@
                                Text="{Binding Label}" />
                     </Grid>
                 </DataTemplate>
-
+                <DataTemplate x:Key="gly">
+                    <Grid>
+                        
+                    </Grid>
+                </DataTemplate>
             </Grid.Resources>
 
             <controls:HamburgerMenu x:Name="HamburgerMenuControl"
@@ -89,10 +93,17 @@
                             </controls:HamburgerMenuGlyphItem.Tag>
                         </controls:HamburgerMenuGlyphItem>-->
 
-                        <controls:HamburgerMenuGlyphItem Glyph="\u0000266B;"
-                                                     Label="Local Songs">
+                        <controls:HamburgerMenuGlyphItem  Glyph=""
+                                                     Label="Local Songs"  >
                             <controls:HamburgerMenuGlyphItem.Tag>
                                 <views:LocalSongs/>
+                            </controls:HamburgerMenuGlyphItem.Tag>
+                        </controls:HamburgerMenuGlyphItem>
+
+                        <controls:HamburgerMenuGlyphItem Glyph=""
+                                                     Label="Currently Playing">
+                            <controls:HamburgerMenuGlyphItem.Tag>
+                                <views:CurrentPlayList/>
                             </controls:HamburgerMenuGlyphItem.Tag>
                         </controls:HamburgerMenuGlyphItem>
 

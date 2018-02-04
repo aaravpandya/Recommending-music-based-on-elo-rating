@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
+
 
 namespace MetroDesignAppST
 {
@@ -26,6 +28,7 @@ namespace MetroDesignAppST
         //this ctr is 0 when playback is stopped and 1 when its playing. its used to change the playbtn icon in the ui.
         //until a better alternative is implemented
         int ctr = 0;
+        public string font;
         public MainWindow()
         {
             InitializeComponent();
