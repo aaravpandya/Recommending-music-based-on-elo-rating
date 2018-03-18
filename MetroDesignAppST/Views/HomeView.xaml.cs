@@ -28,15 +28,9 @@ namespace MetroDesignAppST.Views
             InitializeComponent();
             vm = new HomeViewModel();
             this.DataContext = vm;
-            //list.ItemsSource = vm.mc.mfiles;
-            DG.ItemsSource = HomeViewModel.mc.mfiles;
         }
 
-        private void DG_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            MusicFile selected = (MusicFile)DG.SelectedItem;
-            vm.SendSelectedItem(selected);
-        }
+        
 
         
 

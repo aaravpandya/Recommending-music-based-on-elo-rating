@@ -101,9 +101,11 @@
     </ApplicationDefinition>
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Models\MusicPlayer.cs" />
+    <Compile Include="Models\Playlist.cs" />
     <Compile Include="ViewModel\AboutViewModel.cs" />
     <Compile Include="ViewModel\CurrentPlayListViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
+    <Compile Include="ViewModel\LocalSongsViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="Views\About.xaml.cs">

@@ -22,9 +22,9 @@ namespace MetroDesignAppST.Models
         private ISoundOut _soundOut;
         private IWaveSource _waveSource;
         private System.Timers.Timer timer;
-        public event EventHandler PositionChangedEventHandler;
+        //public event EventHandler PositionChangedEventHandler;
         public event PropertyChangedEventHandler PropertyChanged;
-
+        
         public PlaybackState PlaybackState
         {
             get
@@ -48,7 +48,7 @@ namespace MetroDesignAppST.Models
                 {
                     _waveSource.SetPosition(value);
                     OnPropertyChanged();
-                    OnPositionChanged(EventArgs.Empty);
+                    //OnPositionChanged(EventArgs.Empty);
                 }
                   
 
@@ -107,10 +107,10 @@ namespace MetroDesignAppST.Models
             PropertyChanged?.Invoke(this, propertyChangedEventArgs);
         }
 
-        public void OnPositionChanged(EventArgs e)
-        {
-            PositionChangedEventHandler?.Invoke(this, e);
-        }
+        //public void OnPositionChanged(EventArgs e)
+        //{
+        //    PositionChangedEventHandler?.Invoke(this, e);
+        //}
 
         #endregion
 
@@ -124,21 +124,21 @@ namespace MetroDesignAppST.Models
         public void Play()
         {
             CleanupPlayback();
-            if (MusicFileCollection.selectedItem == null)
+            //if (MusicFileCollection.selectedItem == null)
 
-            {
-                _waveSource = CodecFactory.Instance.GetCodec(List[0].FullName);
-                _soundOut = new WasapiOut();
-                _soundOut.Initialize(_waveSource);
-                _soundOut.Play();
-            }
-            else
-            {
-                _waveSource = CodecFactory.Instance.GetCodec(MusicFileCollection.selectedItem.FullName);
-                _soundOut = new WasapiOut();
-                _soundOut.Initialize(_waveSource);
-                _soundOut.Play();
-            }
+            //{
+            //    _waveSource = CodecFactory.Instance.GetCodec(List[0].FullName);
+            //    _soundOut = new WasapiOut();
+            //    _soundOut.Initialize(_waveSource);
+            //    _soundOut.Play();
+            //}
+            //else
+            //{
+            //    _waveSource = CodecFactory.Instance.GetCodec(MusicFileCollection.selectedItem.FullName);
+            //    _soundOut = new WasapiOut();
+            //    _soundOut.Initialize(_waveSource);
+            //    _soundOut.Play();
+            //}
         }
 
         public void Play(MusicFile file)
@@ -148,12 +148,13 @@ namespace MetroDesignAppST.Models
             _soundOut = new WasapiOut();
             _soundOut.Initialize(_waveSource);
             _soundOut.Play();
+            _soundOut.WaitForStopped();
 
         }
 
         public void Pause ()
         {
-            _soundOut.Pause();
+            _soundOut?.Pause();
         }
 
         public void Stop()

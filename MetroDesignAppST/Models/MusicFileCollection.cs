@@ -8,15 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using TagLib;
 using MetroDesignAppST.Extensions;
+using System.Collections;
 
 namespace MetroDesignAppST.Models
 {
-    public class MusicFileCollection
+    public class MusicFileCollection : IEnumerable<MusicFile>
     {
         public ObservableCollection<MusicFile> mfiles;
         public ConcurrentBag<MusicFile> MusicFilesCB;
         public MusicFile mf = null;
-        public static MusicFile selectedItem;
         public MusicFileCollection()
         {
             MusicFilesCB = new ConcurrentBag<MusicFile>();
@@ -24,6 +24,10 @@ namespace MetroDesignAppST.Models
             PopulateList();
             mfiles = (MusicFilesCB as IEnumerable<MusicFile>).ToObservableCollection();
             
+        }
+        public MusicFileCollection(IEnumerable<MusicFile> EnumerableColl)
+        {
+            mfiles = EnumerableColl.ToObservableCollection();
         }
 
         internal void Shuffle()
@@ -64,6 +68,16 @@ namespace MetroDesignAppST.Models
                 
 
             }
+        }
+
+        public IEnumerator<MusicFile> GetEnumerator()
+        {
+            return ((IEnumerable<MusicFile>)mfiles).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable<MusicFile>)mfiles).GetEnumerator();
         }
 
         public MusicFile this[int index]

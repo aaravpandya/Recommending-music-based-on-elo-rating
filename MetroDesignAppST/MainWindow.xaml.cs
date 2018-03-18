@@ -75,7 +75,7 @@ namespace MetroDesignAppST
 
         private void ShuffleBtn_Click(object sender, RoutedEventArgs e)
         {
-            HomeViewModel.Shuffle();
+            LocalSongsViewModel.Shuffle();
         }
     }
 }
