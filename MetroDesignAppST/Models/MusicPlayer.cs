@@ -6,25 +6,32 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MetroDesignAppST.Models
 {
     public class MusicPlayer : INotifyPropertyChanged
     {
+        #region multithreading props
+        //Used to cancel the play tasks 
+        private CancellationTokenSource cts;
+        private CancellationToken token;
+        private Action PlayMusic;
+        #endregion
 
 
-       
 
         #region properties
 
         private MusicFileCollection List;
         private ISoundOut _soundOut;
         private IWaveSource _waveSource;
+        //Used to update the position of slider in UI
         private System.Timers.Timer timer;
         //public event EventHandler PositionChangedEventHandler;
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
         public PlaybackState PlaybackState
         {
             get
@@ -50,7 +57,7 @@ namespace MetroDesignAppST.Models
                     OnPropertyChanged();
                     //OnPositionChanged(EventArgs.Empty);
                 }
-                  
+
 
             }
         }
@@ -70,13 +77,19 @@ namespace MetroDesignAppST.Models
 
         #region constructors
 
-        public MusicPlayer():this(null)
+        public MusicPlayer() : this(null)
         {
-            
+            cts = new CancellationTokenSource();
+            token = cts.Token;
         }
 
         public MusicPlayer(MusicFileCollection list)
         {
+            PlayMusic = Play();
+
+            cts = new CancellationTokenSource();
+            token = cts.Token;
+
             if (list != null)
                 this.List = list;
             else
@@ -86,7 +99,7 @@ namespace MetroDesignAppST.Models
 
             // Hook up the Elapsed event for the timer.
             timer.Elapsed += Timer_Elapsed;
-            
+
 
             timer.Enabled = true;
         }
@@ -152,15 +165,15 @@ namespace MetroDesignAppST.Models
 
         }
 
-        public void Pause ()
+        public void Pause()
         {
             _soundOut?.Pause();
         }
 
         public void Stop()
         {
-            if(_soundOut != null)
-            _soundOut.Stop();
+            if (_soundOut != null)
+                _soundOut.Stop();
             CleanupPlayback();
         }
 
@@ -178,7 +191,7 @@ namespace MetroDesignAppST.Models
             }
         }
 
-        
+
         #endregion
     }
 }

@@ -31,7 +31,7 @@ namespace MetroDesignAppST.Models
         #region Methods
         internal static void Play()
         {
-            //t = new Task(() => {
+            
                 if (Loc_SelectedItems != null)
                 {
                     curr_Playlist = Loc_SelectedItems;
@@ -48,7 +48,6 @@ namespace MetroDesignAppST.Models
                         _player.Play(m);
                     }
                 }
-            //});
         }
 
     #endregion
