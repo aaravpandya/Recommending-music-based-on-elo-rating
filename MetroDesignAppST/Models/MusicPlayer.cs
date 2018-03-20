@@ -17,12 +17,17 @@ namespace MetroDesignAppST.Models
         //Used to cancel the play tasks 
         private CancellationTokenSource cts;
         private CancellationToken token;
-        private Action PlayMusic;
+        private Task PlayMusic;
+        private Task PlayMusicWithFile;
         #endregion
 
 
 
         #region properties
+
+        //Temp File
+        private MusicFile _file;
+        public MusicFile File { get { return _file; } set { _file = value; } }
 
         private MusicFileCollection List;
         private ISoundOut _soundOut;
@@ -85,11 +90,13 @@ namespace MetroDesignAppST.Models
 
         public MusicPlayer(MusicFileCollection list)
         {
-            PlayMusic = Play();
-
+            //MultiThreading
             cts = new CancellationTokenSource();
             token = cts.Token;
+            token.Register(OnCancellation);
+            
 
+            
             if (list != null)
                 this.List = list;
             else
@@ -104,6 +111,7 @@ namespace MetroDesignAppST.Models
             timer.Enabled = true;
         }
 
+        
 
 
         #endregion
@@ -129,11 +137,40 @@ namespace MetroDesignAppST.Models
 
         #region Methods
 
+        private void OnCancellation()
+        {
+            if (!PlayMusic.IsCompleted)
+                PlayMusic.Dispose();
+            else if (!PlayMusicWithFile.IsCompleted)
+                PlayMusicWithFile.Dispose();
+            CleanupPlayback();
+        }
+
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (_waveSource != null)
                 Position = _waveSource.GetPosition();
         }
+
+        public Task PlayBGAsync(MusicFile file)
+        {
+            File = file;
+            if (File != null)
+            {
+                this.PlayMusicWithFile = new Task(() => Play(File), token);
+                PlayMusicWithFile.Start();
+                return PlayMusicWithFile;
+            }
+
+            else
+            {
+                this.PlayMusic = new Task(() => Play(), token);
+                PlayMusic.Start();
+                return PlayMusic;
+            }
+
+        }
+
         public void Play()
         {
             CleanupPlayback();
@@ -156,6 +193,8 @@ namespace MetroDesignAppST.Models
 
         public void Play(MusicFile file)
         {
+
+
             CleanupPlayback();
             _waveSource = CodecFactory.Instance.GetCodec(file.FullName);
             _soundOut = new WasapiOut();

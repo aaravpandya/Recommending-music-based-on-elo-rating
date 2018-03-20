@@ -50,7 +50,7 @@ namespace MetroDesignAppST.ViewModel
 
         public void Play()
         {
-            Playlist.Play();
+            Playlist.PlayAsync();
         }
 
         public void Pause()

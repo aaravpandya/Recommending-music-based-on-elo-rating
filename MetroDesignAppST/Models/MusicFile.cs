@@ -35,6 +35,10 @@ namespace MetroDesignAppST.Models
 
         }
 
+        public MusicFile()
+        {
+        }
+
         #endregion
 
     }
